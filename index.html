@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ひだまり農園 - マイ作物 紹介ポートフォリオ</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Font Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sprout: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        sunshine: {
+                            100: '#fef3c7',
+                            400: '#facc15',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                        },
+                        earth: {
+                            50: '#fdf8f6',
+                            100: '#f2e8e5',
+                            600: '#8c5946',
+                            700: '#734434',
+                            800: '#5c3327',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans JP', 'sans-serif'],
+                        rounded: ['M PLUS Rounded 1c', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #fafaf9;
+        }
+        .font-rounded {
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="text-slate-700 antialiased selection:bg-sprout-200 selection:text-sprout-900">
+
+    <!-- ナビゲーションバー -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-sprout-100 shadow-sm transition-all">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2.5 group">
+                <div class="w-10 h-10 rounded-xl bg-sprout-500 text-white flex items-center justify-center font-bold text-xl shadow-md group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-seedling"></i>
+                </div>
+                <div>
+                    <span class="font-rounded font-extrabold text-lg sm:text-xl text-slate-800 leading-tight block">ひだまりファーム</span>
+                    <span class="text-[10px] text-sprout-700 font-bold tracking-wider block">MY CROPS PORTFOLIO</span>
+                </div>
+            </a>
+
+            <!-- ナビリンク (デスクトップ) -->
+            <nav class="hidden md:flex items-center gap-6 text-sm font-bold text-slate-600">
+                <a href="#crops" class="hover:text-sprout-600 transition flex items-center gap-1.5"><i class="fa-solid fa-carrot text-sprout-500"></i> 作物一覧</a>
+                <a href="#timeline" class="hover:text-sprout-600 transition flex items-center gap-1.5"><i class="fa-solid fa-calendar-days text-sunshine-500"></i> 成長カレンダー</a>
+                <a href="#philosophy" class="hover:text-sprout-600 transition flex items-center gap-1.5"><i class="fa-solid fa-heart text-rose-500"></i> こだわり</a>
+                <a href="#gallery" class="hover:text-sprout-600 transition flex items-center gap-1.5"><i class="fa-solid fa-camera text-sky-500"></i> 生育フォト日記</a>
+            </nav>
+
+            <a href="#contact" class="hidden sm:inline-flex bg-sprout-600 hover:bg-sprout-700 text-white text-xs sm:text-sm font-bold px-4 py-2 rounded-xl shadow-sm hover:shadow transition items-center gap-2">
+                <i class="fa-regular fa-paper-plane"></i>
+                <span>お問い合わせ・おすそ分け</span>
+            </a>
+
+            <!-- モバイルメニューボタン -->
+            <button id="btn-mobile-menu" class="md:hidden p-2 text-slate-600 hover:text-sprout-600 text-xl" aria-label="メニュー">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- モバイルナビメニュー -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-2">
+            <a href="#crops" class="mobile-link block py-2 px-3 rounded-lg text-sm font-bold text-slate-700 hover:bg-sprout-50"><i class="fa-solid fa-carrot text-sprout-500 mr-2"></i> 作物一覧</a>
+            <a href="#timeline" class="mobile-link block py-2 px-3 rounded-lg text-sm font-bold text-slate-700 hover:bg-sprout-50"><i class="fa-solid fa-calendar-days text-sunshine-500 mr-2"></i> 成長カレンダー</a>
+            <a href="#philosophy" class="mobile-link block py-2 px-3 rounded-lg text-sm font-bold text-slate-700 hover:bg-sprout-50"><i class="fa-solid fa-heart text-rose-500 mr-2"></i> こだわり</a>
+            <a href="#gallery" class="mobile-link block py-2 px-3 rounded-lg text-sm font-bold text-slate-700 hover:bg-sprout-50"><i class="fa-solid fa-camera text-sky-500 mr-2"></i> 生育フォト日記</a>
+            <a href="#contact" class="mobile-link block py-2 px-3 rounded-lg text-sm font-bold text-white bg-sprout-600 text-center"><i class="fa-regular fa-paper-plane mr-2"></i> お問い合わせ</a>
+        </div>
+    </header>
+
+    <!-- ヒーローセクション -->
+    <section class="relative overflow-hidden bg-gradient-to-b from-sprout-100/70 via-emerald-50/30 to-slate-50 py-16 sm:py-24">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur border border-sprout-200 text-sprout-800 px-3.5 py-1.5 rounded-full text-xs font-bold shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-sprout-500 animate-pulse"></span>
+                        <span>2026年 旬の朝採れ野菜をすくすく栽培中！</span>
+                    </div>
+                    <h1 class="font-rounded text-3xl sm:text-5xl font-extrabold text-slate-900 leading-tight tracking-tight">
+                        太陽と大地のめぐみ。<br>
+                        <span class="text-sprout-600">手塩にかけて育てた</span> 自慢の作物たち
+                    </h1>
+                    <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        「ひだまりファーム」へようこそ！当農園では有機質肥料にこだわり、自家消費や地域のみなさまに笑顔をお届けできるよう、年間を通じて多様な野菜や果物を愛情たっぷり育てています。
+                    </p>
+                    <div class="flex flex-wrap gap-4 justify-center lg:justify-start pt-2">
+                        <a href="#crops" class="bg-sprout-600 hover:bg-sprout-700 text-white font-rounded font-bold px-6 py-3.5 rounded-2xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5 flex items-center gap-2 text-sm sm:text-base">
+                            <i class="fa-solid fa-wheat-awn"></i>
+                            <span>自慢の作物を見る</span>
+                        </a>
+                        <a href="#timeline" class="bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-rounded font-bold px-6 py-3.5 rounded-2xl shadow-sm hover:shadow transition flex items-center gap-2 text-sm sm:text-base">
+                            <i class="fa-solid fa-clock-rotate-left text-sunshine-500"></i>
+                            <span>収穫スケジュール</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ヒーロービジュアル（作物カードのフローティング風デザイン） -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-sm sm:max-w-md lg:max-w-none">
+                        <div class="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-200">
+                            <img src="https://images.unsplash.com/photo-1595855759920-86582396756a?auto=format&fit=crop&w=800&q=80" alt="採れたて野菜の詰合せ" class="w-full h-full object-cover">
+                        </div>
+                        
+                        <!-- フローティングバッジ1 -->
+                        <div class="absolute -bottom-6 -left-4 bg-white/95 backdrop-blur border border-slate-100 p-3.5 rounded-2xl shadow-xl flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg">
+                                <i class="fa-solid fa-sun"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 font-bold">年間栽培種</p>
+                                <p class="font-rounded font-extrabold text-slate-800 text-sm">全15種類以上</p>
+                            </div>
+                        </div>
+
+                        <!-- フローティングバッジ2 -->
+                        <div class="absolute -top-6 -right-4 bg-white/95 backdrop-blur border border-slate-100 p-3.5 rounded-2xl shadow-xl flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-sprout-100 text-sprout-600 flex items-center justify-center font-bold text-lg">
+                                <i class="fa-solid fa-leaf"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 font-bold">こだわり</p>
+                                <p class="font-rounded font-extrabold text-slate-800 text-sm">有機減農薬栽培</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作物一覧セクション -->
+    <section id="crops" class="py-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+            <span class="text-sprout-600 font-bold text-xs tracking-wider uppercase bg-sprout-50 px-3 py-1 rounded-full border border-sprout-200">OUR CROPS</span>
+            <h2 class="font-rounded text-2xl sm:text-4xl font-extrabold text-slate-800 mt-2 mb-3">育てている作物図鑑</h2>
+            <p class="text-sm text-slate-500">季節ごとの旬の作物たち。カードをクリックすると育て方のこだわりやおすすめレシピをご覧いただけます。</p>
+        </div>
+
+        <!-- 検索・フィルターコントロール -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <!-- カテゴリータブ -->
+            <div id="filter-tabs" class="flex flex-wrap gap-2 w-full md:w-auto">
+                <button data-category="all" class="filter-btn active text-xs font-bold px-4 py-2 rounded-xl transition bg-sprout-600 text-white shadow-sm">
+                    すべて (ALL)
+                </button>
+                <button data-category="summer" class="filter-btn text-xs font-bold px-4 py-2 rounded-xl transition bg-slate-100 text-slate-600 hover:bg-slate-200">
+                    夏野菜
+                </button>
+                <button data-category="autumn-winter" class="filter-btn text-xs font-bold px-4 py-2 rounded-xl transition bg-slate-100 text-slate-600 hover:bg-slate-200">
+                    秋冬野菜
+                </button>
+                <button data-category="fruit" class="filter-btn text-xs font-bold px-4 py-2 rounded-xl transition bg-slate-100 text-slate-600 hover:bg-slate-200">
+                    果物・果樹
+                </button>
+                <button data-category="herb" class="filter-btn text-xs font-bold px-4 py-2 rounded-xl transition bg-slate-100 text-slate-600 hover:bg-slate-200">
+                    ハーブ・その他
+                </button>
+            </div>
+
+            <!-- 検索キーワード入力 -->
+            <div class="relative w-full md:w-64">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                <input type="text" id="search-crop" placeholder="作物名で検索..." class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-sprout-500">
+            </div>
+        </div>
+
+        <!-- 作物カードグリッド -->
+        <div id="crops-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- JavaScriptで動的生成されます -->
+        </div>
+    </section>
+
+    <!-- 作物詳細モーダル -->
+    <div id="modal-crop-detail" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar shadow-2xl relative border border-slate-100">
+            <!-- 閉じるボタン -->
+            <button id="btn-close-modal" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/40 text-white hover:bg-black/60 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- モーダルヘッダー画像 -->
+            <div class="h-64 sm:h-72 w-full relative overflow-hidden bg-slate-200">
+                <img id="modal-img" src="" alt="作物画像" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-4 left-6 right-6 text-white">
+                    <span id="modal-badge" class="bg-sprout-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider mb-2 inline-block"></span>
+                    <h3 id="modal-title" class="font-rounded text-2xl sm:text-3xl font-extrabold mb-1"></h3>
+                    <p id="modal-variety" class="text-xs text-slate-200 font-medium"></p>
+                </div>
+            </div>
+
+            <!-- モーダルボディ -->
+            <div class="p-6 space-y-6">
+                <!-- 基本スペックタグ -->
+                <div class="grid grid-cols-3 gap-3 bg-sprout-50/60 p-4 rounded-2xl border border-sprout-100 text-center">
+                    <div>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase">旬の時期</p>
+                        <p id="modal-season" class="font-rounded font-bold text-slate-800 text-xs sm:text-sm mt-0.5"></p>
+                    </div>
+                    <div class="border-x border-sprout-100 px-2">
+                        <p class="text-[10px] text-slate-400 font-bold uppercase">栽培難易度</p>
+                        <p id="modal-difficulty" class="font-rounded font-bold text-amber-600 text-xs sm:text-sm mt-0.5"></p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase">糖度・食感</p>
+                        <p id="modal-feature" class="font-rounded font-bold text-slate-800 text-xs sm:text-sm mt-0.5"></p>
+                    </div>
+                </div>
+
+                <!-- 説明文章 -->
+                <div>
+                    <h4 class="font-rounded font-bold text-slate-800 text-sm mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-quote-left text-sprout-500"></i> この作物について
+                    </h4>
+                    <p id="modal-description" class="text-xs sm:text-sm text-slate-600 leading-relaxed whitespace-pre-line"></p>
+                </div>
+
+                <!-- 育て方のこだわり -->
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                    <h4 class="font-rounded font-bold text-slate-800 text-xs sm:text-sm mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-hand-holding-hand text-earth-600"></i> 栽培のこだわりポイント
+                    </h4>
+                    <p id="modal-care" class="text-xs text-slate-600 leading-relaxed"></p>
+                </div>
+
+                <!-- おすすめの食べ方・レシピ -->
+                <div class="bg-amber-50/60 p-4 rounded-2xl border border-amber-100">
+                    <h4 class="font-rounded font-bold text-amber-900 text-xs sm:text-sm mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-utensils text-sunshine-600"></i> おいしい食べ方＆おすすめレシピ
+                    </h4>
+                    <p id="modal-recipe" class="text-xs text-amber-800 leading-relaxed"></p>
+                </div>
+
+                <!-- アクション -->
+                <div class="pt-2 flex justify-end">
+                    <a href="#contact" id="btn-modal-request" class="bg-sprout-600 hover:bg-sprout-700 text-white text-xs sm:text-sm font-bold px-5 py-2.5 rounded-xl shadow transition flex items-center gap-2">
+                        <i class="fa-regular fa-paper-plane"></i>
+                        <span>この作物について問い合わせる</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 成長カレンダー＆リアルタイム進捗 -->
+    <section id="timeline" class="py-16 bg-slate-100/70 border-y border-slate-200/80">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-sunshine-600 font-bold text-xs tracking-wider uppercase bg-sunshine-100 px-3 py-1 rounded-full border border-sunshine-400/30">CROP SCHEDULE</span>
+                <h2 class="font-rounded text-2xl sm:text-4xl font-extrabold text-slate-800 mt-2 mb-3">現在の成長ステータス</h2>
+                <p class="text-sm text-slate-500">畑でスクスク育っている主な作物の現在の生育ステージです。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 進捗カード 1 -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">🍅</span>
+                            <div>
+                                <h3 class="font-rounded font-bold text-base text-slate-800">極旨フルティカトマト</h3>
+                                <p class="text-xs text-slate-400">播種: 3月中旬 / 収穫予定: 6月〜8月</p>
+                            </div>
+                        </div>
+                        <span class="bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1 rounded-full">開花・結実期</span>
+                    </div>
+
+                    <!-- プログレスバー -->
+                    <div>
+                        <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                            <span>成長進捗率</span>
+                            <span>75% (まもなく赤く熟します)</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden p-0.5 border border-slate-200">
+                            <div class="bg-gradient-to-r from-sprout-400 to-rose-500 h-full rounded-full transition-all duration-1000" style="width: 75%"></div>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-slate-500 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        💬 <strong>農作業メモ:</strong> 第1花房の実がぷっくりと膨らんできました！日当たりの調整と脇芽摘みを念入りに行なっています。
+                    </p>
+                </div>
+
+                <!-- 進捗カード 2 -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">🌽</span>
+                            <div>
+                                <h3 class="font-rounded font-bold text-base text-slate-800">ゴールドラッシュ（トウモロコシ）</h3>
+                                <p class="text-xs text-slate-400">播種: 4月上旬 / 収穫予定: 7月初旬</p>
+                            </div>
+                        </div>
+                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">すくすく生長期</span>
+                    </div>
+
+                    <!-- プログレスバー -->
+                    <div>
+                        <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                            <span>成長進捗率</span>
+                            <span>50% (背丈が膝上まで成長)</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden p-0.5 border border-slate-200">
+                            <div class="bg-gradient-to-r from-sprout-400 to-sunshine-500 h-full rounded-full transition-all duration-1000" style="width: 50%"></div>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-slate-500 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        💬 <strong>農作業メモ:</strong> 追肥と土寄せを完了！アワノメイガ対策に防虫ネットをしっかり設置しています。
+                    </p>
+                </div>
+
+                <!-- 進捗カード 3 -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">🥔</span>
+                            <div>
+                                <h3 class="font-rounded font-bold text-base text-slate-800">春じゃがいも（キタアカリ）</h3>
+                                <p class="text-xs text-slate-400">植付: 2月下旬 / 収穫予定: 5月下旬</p>
+                            </div>
+                        </div>
+                        <span class="bg-sprout-100 text-sprout-800 text-xs font-bold px-3 py-1 rounded-full">収穫間近！</span>
+                    </div>
+
+                    <!-- プログレスバー -->
+                    <div>
+                        <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                            <span>成長進捗率</span>
+                            <span>90% (葉が黄色く熟成中)</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden p-0.5 border border-slate-200">
+                            <div class="bg-gradient-to-r from-sprout-400 to-earth-600 h-full rounded-full transition-all duration-1000" style="width: 90%"></div>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-slate-500 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        💬 <strong>農作業メモ:</strong> 地上の葉が少しずつ枯れてきました。晴天が3日続いたタイミングで試し掘りを予定しています！
+                    </p>
+                </div>
+
+                <!-- 進捗カード 4 -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">🍠</span>
+                            <div>
+                                <h3 class="font-rounded font-bold text-base text-slate-800">ねっとり甘い紅はるか</h3>
+                                <p class="text-xs text-slate-400">苗植え: 5月中旬 / 収穫予定: 10月中旬</p>
+                            </div>
+                        </div>
+                        <span class="bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1 rounded-full">定着・つる伸ばし</span>
+                    </div>
+
+                    <!-- プログレスバー -->
+                    <div>
+                        <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                            <span>成長進捗率</span>
+                            <span>25% (しっかり根付き完了)</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden p-0.5 border border-slate-200">
+                            <div class="bg-gradient-to-r from-sprout-400 to-purple-500 h-full rounded-full transition-all duration-1000" style="width: 25%"></div>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-slate-500 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        💬 <strong>農作業メモ:</strong> 挿し苗から無事に新芽が勢いよく立ち上がりました。根がしっかり張るよう適度な水分管理を行います。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 土づくりと栽培のこだわり -->
+    <section id="philosophy" class="py-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-earth-600 font-bold text-xs tracking-wider uppercase bg-earth-50 px-3 py-1 rounded-full border border-earth-100">OUR PHILOSOPHY</span>
+            <h2 class="font-rounded text-2xl sm:text-4xl font-extrabold text-slate-800 mt-2 mb-3">ひだまりファーム 3つのこだわり</h2>
+            <p class="text-sm text-slate-500">安心して皮ごと食べられる美味しくて体にやさしい作物作りのために。</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm text-center relative overflow-hidden group hover:border-sprout-300 transition">
+                <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-sprout-100 text-sprout-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-recycle"></i>
+                </div>
+                <h3 class="font-rounded font-bold text-lg text-slate-800 mb-3">1. 自家製堆肥とふかふか土壌</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    落ち葉や米ぬか、油かすをじっくり発酵させた自家製堆肥を使用。微生物が豊富なふかふかの土が健康な根を育てます。
+                </p>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm text-center relative overflow-hidden group hover:border-sunshine-400 transition">
+                <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-sunshine-100 text-sunshine-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-droplet"></i>
+                </div>
+                <h3 class="font-rounded font-bold text-lg text-slate-800 mb-3">2. 澄んだ天然地下水</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    水はミネラルをたっぷり含んだ地下天然水を汲み上げて散水。作物本来のみずみずしい甘みと香りを引き出します。
+                </p>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm text-center relative overflow-hidden group hover:border-rose-300 transition">
+                <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-shield-cat"></i>
+                </div>
+                <h3 class="font-rounded font-bold text-lg text-slate-800 mb-3">3. 徹底した無農薬・減農薬</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    害虫対策は防虫ネットやコンパニオンプランツ（混作）を活用。必要最小限のケアで、お子様も安心の安全野菜をお届けします。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 生育フォト日記 -->
+    <section id="gallery" class="py-16 bg-slate-900 text-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-sprout-400 font-bold text-xs tracking-wider uppercase bg-sprout-950 px-3 py-1 rounded-full border border-sprout-800">PHOTO LOGS</span>
+                    <h2 class="font-rounded text-2xl sm:text-4xl font-extrabold mt-2">畑のリアルタイム風景日記</h2>
+                </div>
+                <p class="text-xs text-slate-400 max-w-md">日々の草むしりや受粉、収穫の瞬間の写真を不定期で更新中！</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="group relative rounded-2xl overflow-hidden aspect-square bg-slate-800">
+                    <img src="https://images.unsplash.com/photo-1592417817098-8f3d6eb23659?auto=format&fit=crop&w=600&q=80" alt="収穫の様子" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition p-4 flex flex-col justify-end">
+                        <span class="text-[10px] text-sprout-400 font-bold">2026/05/18</span>
+                        <p class="text-xs font-bold">朝採れ真っ赤な完熟イチゴ！甘味バッチリです。</p>
+                    </div>
+                </div>
+
+                <div class="group relative rounded-2xl overflow-hidden aspect-square bg-slate-800">
+                    <img src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=600&q=80" alt="芽吹き" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition p-4 flex flex-col justify-end">
+                        <span class="text-[10px] text-sprout-400 font-bold">2026/04/10</span>
+                        <p class="text-xs font-bold">枝豆の発芽ラッシュ！可愛い双葉が揃いました。</p>
+                    </div>
+                </div>
+
+                <div class="group relative rounded-2xl overflow-hidden aspect-square bg-slate-800">
+                    <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=600&q=80" alt="畑の風景" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition p-4 flex flex-col justify-end">
+                        <span class="text-[10px] text-sprout-400 font-bold">2026/05/02</span>
+                        <p class="text-xs font-bold">快晴の畑仕事。畝立てとマルチ張りが完了。</p>
+                    </div>
+                </div>
+
+                <div class="group relative rounded-2xl overflow-hidden aspect-square bg-slate-800">
+                    <img src="https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?auto=format&fit=crop&w=600&q=80" alt="新鮮野菜" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition p-4 flex flex-col justify-end">
+                        <span class="text-[10px] text-sprout-400 font-bold">2026/05/25</span>
+                        <p class="text-xs font-bold">みずみずしい採れたてズッキーニの仕分け。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- お問い合わせ・おすそ分けフォーム -->
+    <section id="contact" class="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-xl">
+            <div class="text-center max-w-xl mx-auto mb-8">
+                <span class="text-sprout-600 font-bold text-xs tracking-wider uppercase bg-sprout-50 px-3 py-1 rounded-full border border-sprout-200">CONTACT & RESERVATION</span>
+                <h2 class="font-rounded text-2xl sm:text-3xl font-extrabold text-slate-800 mt-2">お問い合わせ・おすそ分けリクエスト</h2>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1">「〇〇の収穫時期に分けてほしい」「栽培方法を聞きたい」など、お気軽にお声がけください！</p>
+            </div>
+
+            <form id="form-contact" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">お名前 <span class="text-rose-500">*</span></label>
+                        <input type="text" id="input-name" required placeholder="山田 太郎" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-sprout-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">メールアドレス <span class="text-rose-500">*</span></label>
+                        <input type="email" id="input-email" required placeholder="example@email.com" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-sprout-500">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">興味のある作物（複数選択可）</label>
+                    <select id="input-crop-select" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-sprout-500">
+                        <option value="全般・指定なし">指定なし（全体へのお問合わせ）</option>
+                        <option value="フルーツトマト">極旨フルティカトマト</option>
+                        <option value="ゴールドラッシュ">トウモロコシ（ゴールドラッシュ）</option>
+                        <option value="安納芋・紅はるか">さつまいも（安納芋・紅はるか）</option>
+                        <option value="朝採れイチゴ">甘姫いちご</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">メッセージ・リクエスト内容 <span class="text-rose-500">*</span></label>
+                    <textarea id="input-message" required rows="4" placeholder="ご質問や、取り置き・おすそ分けのご希望などをご自由にご記入ください。" class="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-sprout-500 resize-none"></textarea>
+                </div>
+
+                <button type="submit" id="btn-submit-contact" class="w-full bg-sprout-600 hover:bg-sprout-700 text-white font-rounded font-bold py-3.5 rounded-2xl shadow-lg transition text-sm sm:text-base flex items-center justify-center gap-2">
+                    <i class="fa-regular fa-paper-plane"></i>
+                    <span>メッセージを送信する</span>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-xs">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+            <div class="flex items-center justify-center gap-2 text-white font-rounded font-bold text-lg">
+                <i class="fa-solid fa-seedling text-sprout-400"></i>
+                <span>ひだまりファーム</span>
+            </div>
+            <p class="max-w-md mx-auto text-slate-500 leading-relaxed">
+                自然の恵みと手作りの温かさを大切に。旬の美味しい野菜を日々コツコツ栽培しています。
+            </p>
+            <p class="text-slate-600">© 2026 Hidamari Farm All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- トースト通知 -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white text-xs sm:text-sm font-medium px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border border-slate-800">
+        <i id="toast-icon" class="fa-solid fa-circle-check text-sprout-400 text-lg"></i>
+        <span id="toast-message">メッセージ</span>
+    </div>
+
+    <!-- JavaScript アプリケーションロジック -->
+    <script>
+        // マイ作物データベース定義
+        const CROPS_DATA = [
+            {
+                id: 'crop-1',
+                name: '極旨フルティカトマト',
+                variety: '中玉トマト（フルティカ）',
+                category: 'summer',
+                categoryLabel: '夏野菜',
+                season: '6月 〜 8月',
+                difficulty: '★★★☆☆',
+                feature: '糖度7〜8度 / 高リコピン',
+                image: 'https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=800&q=80',
+                description: '果皮が柔らかく、旨味と甘味のバランスが抜群の中玉品種。フルーツ感覚でパクパク食べられる大人気作物です！',
+                care: '水やりを限界まで控えることで糖度をギュッと凝縮。有機魚かす堆肥を追肥で使用しています。',
+                recipe: '塩とオリーブオイルを回しかけるだけのシンプルカプレーゼや、丸ごと煮込むトマトスープが絶品です！'
+            },
+            {
+                id: 'crop-2',
+                name: '甘姫（あまひめ）いちご',
+                variety: '章姫×とちおとめ交配種',
+                category: 'fruit',
+                categoryLabel: '果物・果樹',
+                season: '12月 〜 5月',
+                difficulty: '★★★★☆',
+                feature: '高糖度 / ジューシー',
+                image: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=800&q=80',
+                description: '一口かじるとジュワッと甘い果汁が広がる朝採れイチゴ。高設栽培で一粒一粒に太陽光が行き渡るよう管理しています。',
+                care: 'ミツバチによる自然交配を採用。病害虫対策には木酢液とハーブエキスを散布しています。',
+                recipe: 'まずは冷やしてそのまま！練乳要らずの甘さです。余った分は自家製贅沢ジャムに。'
+            },
+            {
+                id: 'crop-3',
+                name: 'ほくほくキタアカリ',
+                variety: '春じゃがいも（黄肉種）',
+                category: 'summer',
+                categoryLabel: '夏野菜',
+                season: '5月下旬 〜 7月',
+                difficulty: '★★☆☆☆',
+                feature: 'ホクホク感 / カロテン豊富',
+                image: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=800&q=80',
+                description: '「栗じゃが」とも呼ばれる鮮やかな黄色の身が特徴。レンジで加熱するだけで甘い香りが漂う自慢の土物です。',
+                care: '芽かきと2回の丁寧な土寄せをしっかり行うことで、緑化を防ぎ大粒の芋に育て上げました。',
+                recipe: 'バターを乗せたじゃがバターや、ほくほく食感を活かしたコロッケ・ポテトサラダが一番のおすすめ！'
+            },
+            {
+                id: 'crop-4',
+                name: 'ねっとり蜜芋 紅はるか',
+                variety: 'さつまいも（紅はるか）',
+                category: 'autumn-winter',
+                categoryLabel: '秋冬野菜',
+                season: '10月 〜 2月',
+                difficulty: '★★☆☆☆',
+                feature: '極上の甘味 / 熟成蜜芋',
+                image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80',
+                description: '収穫後、定温倉庫で1ヶ月以上じっくり寝かせることで密が溢れ出す焼き芋に仕上がる極上のさつまいもです。',
+                care: '蔓（つる）返しを定期的に実施し、栄養を芋に集中させています。無農薬で土の力を引き出しています。',
+                recipe: 'オーブントースターでじっくり1時間焼くだけで、スイートポテトのような濃厚ねっとり焼き芋に！'
+            },
+            {
+                id: 'crop-5',
+                name: '朝採れシャキシャキ枝豆',
+                variety: '茶豆風丹波甘豆',
+                category: 'summer',
+                categoryLabel: '夏野菜',
+                season: '7月 〜 8月',
+                difficulty: '★★☆☆☆',
+                feature: '芳醇な香り / コク深い甘み',
+                image: 'https://images.unsplash.com/photo-1551462147-37885acc36f1?auto=format&fit=crop&w=800&q=80',
+                description: 'ビールのお供に最高の贅沢！サヤに産毛がしっかり生えた朝5時採り新鮮枝豆です。',
+                care: '根の根腐れを防ぐ高畝（たかうね）栽培。開花時期の散水を多めにしてぷっくり実を太らせています。',
+                recipe: '多めの塩でもみ洗いし、少ないお湯で蒸し焼きにする「フライパン蒸し」が旨味を逃さず最高です。'
+            },
+            {
+                id: 'crop-6',
+                name: 'フレッシュスイートバジル',
+                variety: 'スイートバジル',
+                category: 'herb',
+                categoryLabel: 'ハーブ・その他',
+                season: '5月 〜 10月',
+                difficulty: '★☆☆☆☆',
+                feature: '清涼感あふれる芳香',
+                image: 'https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&w=800&q=80',
+                description: 'トマトの隣で育てるコンパニオンプランツとしても活躍。摘みたての豊かな香りが食卓を彩ります。',
+                care: '摘心（てきしん）を繰り返すことで脇芽をどんどん増やし、柔らかい新芽を長く収穫します。',
+                recipe: '松の実・オリーブオイル・ニンニクと一緒にミキサーにかけた自家製ジェノベーゼソースが格別！'
+            }
+        ];
+
+        // 状態変数
+        let currentCategory = 'all';
+        let searchQuery = '';
+
+        // DOM要素の取得
+        const cropsGrid = document.getElementById('crops-grid');
+        const searchInput = document.getElementById('search-crop');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        
+        // モーダル要素
+        const modal = document.getElementById('modal-crop-detail');
+        const btnCloseModal = document.getElementById('btn-close-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalBadge = document.getElementById('modal-badge');
+        const modalTitle = document.getElementById('modal-title');
+        const modalVariety = document.getElementById('modal-variety');
+        const modalSeason = document.getElementById('modal-season');
+        const modalDifficulty = document.getElementById('modal-difficulty');
+        const modalFeature = document.getElementById('modal-feature');
+        const modalDescription = document.getElementById('modal-description');
+        const modalCare = document.getElementById('modal-care');
+        const modalRecipe = document.getElementById('modal-recipe');
+        const btnModalRequest = document.getElementById('btn-modal-request');
+
+        // モバイルメニュー
+        const btnMobileMenu = document.getElementById('btn-mobile-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // フォーム
+        const formContact = document.getElementById('form-contact');
+
+        // トースト表示関数
+        function showToast(message, iconClass = "fa-circle-check text-sprout-400") {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastMessage.textContent = message;
+            toastIcon.className = `fa-solid ${iconClass} text-lg`;
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+
+        // 作物カード一覧の描画
+        function renderCrops() {
+            const filtered = CROPS_DATA.filter(crop => {
+                const matchCategory = (currentCategory === 'all') || (crop.category === currentCategory);
+                const matchSearch = crop.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                    crop.variety.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                    crop.description.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchCategory && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                cropsGrid.innerHTML = `
+                    <div class="col-span-full py-16 text-center text-slate-400 bg-white rounded-3xl border border-dashed border-slate-200">
+                        <i class="fa-solid fa-leaf text-4xl mb-3 text-slate-300"></i>
+                        <p class="font-rounded font-bold text-sm">該当する作物が見つかりませんでした</p>
+                        <p class="text-xs text-slate-400 mt-1">検索条件を変更してお試しください。</p>
+                    </div>
+                `;
+                return;
+            }
+
+            cropsGrid.innerHTML = filtered.map(crop => `
+                <div class="crop-card bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col justify-between cursor-pointer" onclick="openCropModal('${crop.id}')">
+                    <div>
+                        <!-- アイキャッチ画像 -->
+                        <div class="h-48 w-full relative overflow-hidden bg-slate-100">
+                            <img src="${crop.image}" alt="${crop.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-slate-800 text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">
+                                ${crop.categoryLabel}
+                            </span>
+                        </div>
+
+                        <!-- カードボディ -->
+                        <div class="p-5">
+                            <p class="text-[10px] font-bold text-sprout-700 tracking-wider mb-1">${crop.variety}</p>
+                            <h3 class="font-rounded font-bold text-slate-800 text-lg mb-2 group-hover:text-sprout-600 transition">
+                                ${crop.name}
+                            </h3>
+                            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+                                ${crop.description}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- フッター情報 -->
+                    <div class="px-5 pb-5 pt-0 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400 font-medium">
+                        <span class="flex items-center gap-1.5 text-slate-600">
+                            <i class="fa-regular fa-calendar text-sprout-500"></i> ${crop.season}
+                        </span>
+                        <span class="text-sprout-600 font-bold group-hover:translate-x-1 transition flex items-center gap-1 text-[11px]">
+                            詳細を見る <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                        </span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 作物詳細モーダルを開く
+        window.openCropModal = function(cropId) {
+            const crop = CROPS_DATA.find(c => c.id === cropId);
+            if (!crop) return;
+
+            modalImg.src = crop.image;
+            modalBadge.textContent = crop.categoryLabel;
+            modalTitle.textContent = crop.name;
+            modalVariety.textContent = crop.variety;
+            modalSeason.textContent = crop.season;
+            modalDifficulty.textContent = crop.difficulty;
+            modalFeature.textContent = crop.feature;
+            modalDescription.textContent = crop.description;
+            modalCare.textContent = crop.care;
+            modalRecipe.textContent = crop.recipe;
+
+            // お問い合わせフォームへの引継ぎリンク設定
+            btnModalRequest.onclick = () => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+                const selectElem = document.getElementById('input-crop-select');
+                
+                // 似ているオプションを選択
+                for (let i = 0; i < selectElem.options.length; i++) {
+                    if (selectElem.options[i].text.includes(crop.name) || crop.name.includes(selectElem.options[i].value)) {
+                        selectElem.selectedIndex = i;
+                        break;
+                    }
+                }
+            };
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        };
+
+        // モーダルを閉じる
+        function closeModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // イベントリスナー初期化
+        document.addEventListener('DOMContentLoaded', () => {
+            // 初回描画
+            renderCrops();
+
+            // 検索イベント
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value.trim();
+                renderCrops();
+            });
+
+            // カテゴリーフィルターイベント
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => {
+                        b.classList.remove('active', 'bg-sprout-600', 'text-white', 'shadow-sm');
+                        b.classList.add('bg-slate-100', 'text-slate-600');
+                    });
+                    btn.classList.add('active', 'bg-sprout-600', 'text-white', 'shadow-sm');
+                    btn.classList.remove('bg-slate-100', 'text-slate-600');
+
+                    currentCategory = btn.getAttribute('data-category');
+                    renderCrops();
+                });
+            });
+
+            // モーダル閉じるイベント
+            btnCloseModal.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+            // ESCキーでモーダル閉じる
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+
+            // モバイルメニュー切替
+            btnMobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // お問い合わせフォーム送信ハンドラー
+            formContact.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('input-name').value;
+
+                showToast(`${name} 様、メッセージを送信しました！`);
+                formContact.reset();
+            });
+        });
+    </script>
+</body>
+</html>
